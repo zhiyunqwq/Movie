@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.*;
 
 public class RegisterActivity extends AppCompatActivity {
-    private EditText Username, Password, ConfirmPassword;
+    private EditText Username, Password, ConfirmPassword,Email;
     private DatabaseHelper mDatabaseHelper;
 
     @Override
@@ -23,7 +23,14 @@ public class RegisterActivity extends AppCompatActivity {
         Username = findViewById(R.id.username_edittext);
         Password = findViewById(R.id.password_edittext);
         ConfirmPassword = findViewById(R.id.repeat);
+        Email = findViewById(R.id.email);
 
+    }
+
+    //已有账号，立刻登录
+    public void GoLog(View btn){
+        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+        startActivity(intent);
     }
     //点击按钮，进行注册
     public void Register(View btn) {
@@ -45,7 +52,7 @@ public class RegisterActivity extends AppCompatActivity {
         // 检查两次输入的密码是否一致
         if (password.equals(confirmPassword)) {
             // 插入数据库
-            boolean isInserted = mDatabaseHelper.insertData(username, password);
+            boolean isInserted = mDatabaseHelper.insertData(username, password,email);
 
             if (isInserted) {
                 // 注册成功

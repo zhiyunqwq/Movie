@@ -53,22 +53,24 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo" />
 
-    <TextView
+    <Button
         android:id="@+id/rEgisterTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="还没账号？立即注册"
-        android:textColor="#000"
+        android:textColor="@color/white"
+        android:onClick="GoReg"
         app:layout_constraintEnd_toEndOf="@+id/password_login"
         app:layout_constraintTop_toBottomOf="@+id/password_login" />
 
-    <TextView
+    <Button
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="忘记密码"
-        android:textColor="#000"
+        android:textColor="@color/white"
+        android:onClick="GoPwd"
         app:layout_constraintBottom_toBottomOf="@+id/rEgisterTv"
         app:layout_constraintStart_toStartOf="@+id/password_login"
         app:layout_constraintTop_toTopOf="@+id/rEgisterTv" />

@@ -14,11 +14,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_ID = "id";
     private static final String COLUMN_USERNAME = "username";
     private static final String COLUMN_PASSWORD = "password";
+    private static final String COLUMN_EMAIL = "email";
 
     private static final String CREATE_TABLE_USERS = "CREATE TABLE "
             + TABLE_USERS + "(" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + COLUMN_USERNAME + " TEXT,"
-            + COLUMN_PASSWORD + " TEXT" + ")";
+            + COLUMN_PASSWORD + " TEXT,"
+            + COLUMN_EMAIL + " TEXT" + ")";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -36,11 +38,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // 插入数据的方法
-    public boolean insertData(String username, String password) {
+    public boolean insertData(String username, String password,String email) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_USERNAME, username);
         values.put(COLUMN_PASSWORD, password);
+        values.put(COLUMN_EMAIL,email);
 
         long result = db.insert(TABLE_USERS, null, values);
         return result != -1;

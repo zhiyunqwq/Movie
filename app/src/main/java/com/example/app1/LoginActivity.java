@@ -26,6 +26,18 @@ public class LoginActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.password_login);
 
     }
+    //前往注册
+    public void GoReg(View btn){
+        Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
+        startActivity(intent);
+    }
+    //前往找回密码
+    public void GoPwd(View btn){
+        Intent intent = new Intent(LoginActivity.this,PwdFindActivity.class);
+        startActivity(intent);
+    }
+
+    //登录方法
     public void Log(View btn) {
 
         loginUser();

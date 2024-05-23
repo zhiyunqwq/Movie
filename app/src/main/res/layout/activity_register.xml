@@ -56,14 +56,15 @@
         android:layout_width="280dp"
         android:layout_height="50dp"
         android:layout_marginTop="50dp"
-        android:background="@drawable/login_view"
+        android:background="@color/black"
         android:text="注 册"
         android:textColor="#fff"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/repeat"
         app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="@+id/repeat"
-        app:layout_constraintTop_toBottomOf="@+id/tv_login" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_login"
+        android:onClick="Register"/>
 
     <ImageView
         android:id="@+id/imageView2"

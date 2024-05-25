@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="10dp">
+
+        <ImageView
+            android:id="@+id/img_item_pic"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/bg"/>
+
+        <TextView
+            android:id="@+id/text_item_film_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/img_item_pic"
+            android:text="后来的我们"
+            android:textSize="17sp"/>
+
+        <TextView
+            android:id="@+id/text_item_released_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/text_item_film_name"
+            android:layout_toRightOf="@id/img_item_pic"
+            android:text="2018-04-28上映"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/text_item_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="15dp"
+            android:text="8.0分"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/text_item_starring"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@id/img_item_pic"
+            android:layout_below="@+id/text_item_released_time"
+            android:text="主演:"
+            android:textSize="16sp"/>
+
+    </RelativeLayout>
+</LinearLayout>

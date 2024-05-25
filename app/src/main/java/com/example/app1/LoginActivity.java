@@ -3,7 +3,6 @@ package com.example.app1;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -61,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
             // 登录成功
             Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
             // 跳转到MainActivity
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            startActivity(new Intent(LoginActivity.this, HotDetailActivity.class));
             finish(); // 结束当前Activity
         } else {
             // 登录失败

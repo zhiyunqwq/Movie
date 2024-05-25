@@ -42,6 +42,7 @@ public class RegisterActivity extends AppCompatActivity {
         String username = this.Username.getText().toString().trim();
         String password = this.Password.getText().toString().trim();
         String confirmPassword = this.ConfirmPassword.getText().toString().trim();
+        String email = this.Email.getText().toString().trim();
 
         // 检查用户名和密码是否为空
         if (username.isEmpty() || password.isEmpty()) {

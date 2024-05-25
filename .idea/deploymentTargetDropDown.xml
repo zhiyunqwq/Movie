@@ -2,7 +2,16 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="HotDetailActivity">
+        <State />
+      </entry>
+      <entry key="MainActivity">
+        <State />
+      </entry>
       <entry key="OpenActivity">
+        <State />
+      </entry>
+      <entry key="PwdFindActivity">
         <State />
       </entry>
       <entry key="RegisterActivity">

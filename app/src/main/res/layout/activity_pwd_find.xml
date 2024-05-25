@@ -4,6 +4,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     tools:context=".PwdFindActivity">
 
+    <EditText
+        android:id="@+id/username_pwdf"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:hint="请输入账号"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <EditText
+        android:id="@+id/email_pwdf"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:hint="请输入邮箱"
+        app:layout_constraintEnd_toEndOf="@+id/username_pwdf"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/username_pwdf"
+        app:layout_constraintTop_toBottomOf="@+id/username_pwdf" />
+
+    <EditText
+        android:id="@+id/npwd_pwdf"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="输入新密码"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/username_pwdf"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/username_pwdf"
+        app:layout_constraintTop_toBottomOf="@+id/email_pwdf" />
+
+    <Button
+        android:id="@+id/goLog_pwdf"
+        android:layout_width="313dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/white"
+        android:onClick="GoLog"
+        android:text="终止操作，立即登录"
+        app:layout_constraintStart_toStartOf="@+id/npwd_pwdf"
+        app:layout_constraintTop_toBottomOf="@+id/npwd_pwdf" />
+
+    <Button
+        android:id="@+id/ConfirmChange_pwdf"
+        android:layout_width="318dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/black"
+        android:onClick="PwdChange"
+        android:text="重置密码"
+        android:textColor="#fff"
+        app:layout_constraintEnd_toEndOf="@+id/npwd_pwdf"
+        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintStart_toStartOf="@+id/npwd_pwdf"
+        app:layout_constraintTop_toBottomOf="@+id/goLog_pwdf" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "userDatabase";
+    private static final String DATABASE_NAME = "Database";
     private static final int DATABASE_VERSION = 1;
     private static final String TABLE_USERS = "users";
     private static final String COLUMN_ID = "id";
@@ -65,6 +65,50 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
 
         return cursorCount > 0;
+    }
+
+    public boolean PwdChange_Data(String username, String email, String newPassword) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] columns = {
+                COLUMN_ID
+        };
+
+        // 查询数据库以验证用户名和邮箱是否匹配
+        String selection = COLUMN_USERNAME + "=?" + " AND " + COLUMN_EMAIL + "=?";
+        String[] selectionArgs = {username, email};
+
+        // 检查用户名和邮箱是否匹配
+        Cursor cursor = db.query(TABLE_USERS, columns, selection, selectionArgs, null, null, null);
+        int cursorCount = cursor.getCount();
+        cursor.close();
+        db.close();
+
+        // 如果找到匹配的用户名和邮箱
+        if (cursorCount > 0) {
+            // 打开可写的数据库
+            db = this.getWritableDatabase();
+
+            // 准备更新密码的SQL语句
+            String updateQuery = "UPDATE " + TABLE_USERS + " SET " + COLUMN_PASSWORD + " = ? " +
+                    "WHERE " + COLUMN_USERNAME + " = ? AND " + COLUMN_EMAIL + " = ?";
+
+            // 使用SQL语句更新密码
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(COLUMN_PASSWORD, newPassword);
+
+            // 执行更新操作
+            long result = db.update(TABLE_USERS, contentValues, COLUMN_USERNAME + "=? AND " + COLUMN_EMAIL + "=?",
+                    new String[] {username, email});
+
+            // 关闭数据库
+            db.close();
+
+            // 如果更新行数大于0，则表示密码更新成功
+            return result > 0;
+        }
+
+        // 如果没有找到匹配的用户名和邮箱，返回false
+        return false;
     }
 
 }

@@ -1,20 +1,19 @@
 package com.example.app1;
 
+import android.graphics.Movie;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.youth.banner;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Banner banner;
     private RecyclerView recyclerViewHot, recyclerViewFuture;
 
     @Override
@@ -22,32 +21,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // 初始化Banner
-        Banner banner = (View)findViewById(R.id.banner);
-        List<String> imageUrls = new ArrayList<>();
-        imageUrls.add("https://example.com/image1.jpg");
-        imageUrls.add("https://example.com/image2.jpg");
-        imageUrls.add("https://example.com/image3.jpg");
-
-        banner.setImages(imageUrls);
 
         // 初始化RecyclerView
         recyclerViewHot = findViewById(R.id.rv_hot);
         recyclerViewFuture = findViewById(R.id.rv_future);
         setUpRecyclerView(recyclerViewHot, "正在热映");
         setUpRecyclerView(recyclerViewFuture, "即将上映");
-    }
-
-    private void setUpBanner() {
-        // 假定你有一个图片URL列表
-        List<String[]> imageUrls = {
-                "http://example.com/image1.jpg",
-                "http://example.com/image2.jpg",
-                // 其他图片URL...
-        };
-
-
-                banner.start();
     }
 
     private void setUpRecyclerView(RecyclerView recyclerView, String type) {
@@ -90,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
             return 0;
         }
 
-        public static class ViewHolder extends RecyclerView.ViewHolder {
+        public class ViewHolder extends RecyclerView.ViewHolder {
             // 定义视图
             public ViewHolder(View itemView) {
                 super(itemView);

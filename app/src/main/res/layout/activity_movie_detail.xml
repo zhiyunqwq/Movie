@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MovieDetailActivity">
 
+    <!-- 布局内容，例如 ImageView 显示电影海报，TextView 显示电影详情 -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,10 +17,10 @@
         android:layout_marginRight="10dp">
 
         <ImageView
-            android:id="@+id/img_item_pic"
+            android:id="@+id/movie_image"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:src="@drawable/bg"/>
+            android:src="@drawable/bg" />
 
         <TextView
             android:id="@+id/text_item_film_name"
@@ -24,18 +28,18 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@id/img_item_pic"
-            android:text="后来的我们"
-            android:textSize="17sp"/>
+            android:text="电影名字"
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/text_item_released_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:layout_below="@+id/text_item_film_name"
+            android:layout_marginTop="15dp"
             android:layout_toRightOf="@id/img_item_pic"
-            android:text="2018-04-28上映"
-            android:textSize="16sp"/>
+            android:text="上映时间"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/text_item_score"
@@ -43,18 +47,18 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginTop="15dp"
-            android:text="8.0分"
-            android:textSize="15sp"/>
+            android:text="评分"
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/text_item_starring"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/text_item_released_time"
             android:layout_marginTop="15dp"
             android:layout_toRightOf="@id/img_item_pic"
-            android:layout_below="@+id/text_item_released_time"
             android:text="主演:"
-            android:textSize="16sp"/>
-
+            android:textSize="16sp" />
     </RelativeLayout>
-</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

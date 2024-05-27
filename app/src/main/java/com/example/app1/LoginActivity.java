@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
             // 登录成功
             Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
             // 跳转到MainActivity
-            startActivity(new Intent(LoginActivity.this, HotDetailActivity.class));
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish(); // 结束当前Activity
         } else {
             // 登录失败

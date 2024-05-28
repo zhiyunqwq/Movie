@@ -7,20 +7,17 @@
     android:orientation="vertical"
     tools:context=".MovieDetailActivity">
 
-    <!-- 布局内容，例如 ImageView 显示电影海报，TextView 显示电影详情 -->
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="10dp">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/movie_image"
             android:layout_width="120dp"
-            android:layout_height="120dp"
-            />
+            android:layout_height="120dp" />
 
         <TextView
             android:id="@+id/text_item_film_name"
@@ -60,5 +57,106 @@
             android:text="主演:"
             android:textSize="16sp" />
     </RelativeLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:id="@+id/ll_seats"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_marginTop="44dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/design_default_color_secondary"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+
+        <ImageView
+            android:id="@+id/seat1"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_marginTop="80dp"
+            android:src="@drawable/seat1"
+            android:tag="seat1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.044"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/seat2"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_marginTop="80dp"
+            android:src="@drawable/seat2"
+            android:tag="seat2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.459"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/seat3"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_marginTop="80dp"
+            android:src="@drawable/seat3"
+            android:tag="seat3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.953"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/seat4"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_marginTop="232dp"
+            android:src="@drawable/seat4"
+            android:tag="seat4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.765"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/seat5"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_marginTop="232dp"
+            android:src="@drawable/seat5"
+            android:tag="seat5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.231"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <EditText
+        android:id="@+id/username_buy"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:hint="请再次输入账号"
+        app:layout_constraintBottom_toTopOf="@+id/seat_confirm"
+        tools:layout_editor_absoluteX="50dp" />
+
+    <Button
+        android:id="@+id/seat_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="36dp"
+        android:text="确定购票，一旦点击，不可撤回"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_seats"
+        app:layout_constraintVertical_bias="1.0"
+        android:onClick="GoFirst"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

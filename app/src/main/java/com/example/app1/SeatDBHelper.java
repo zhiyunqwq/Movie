@@ -1,11 +1,13 @@
 package com.example.app1;
 
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SeatDBHelper extends SQLiteOpenHelper {
 
@@ -22,7 +24,7 @@ public class SeatDBHelper extends SQLiteOpenHelper {
             + TABLE_NAME + "("
             + COLUMN_SEAT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + COLUMN_SEAT_NUMBER + " TEXT NOT NULL,"
-            + COLUMN_IS_BOOKED + " INTEGER NOT NULL DEFAULT 0,"  // 使用整数存储布尔值，0 表示未预订，1 表示已预订
+            + COLUMN_IS_BOOKED + " INTEGER NOT NULL DEFAULT 0,"
             + COLUMN_BOOKED_BY + " TEXT,"
             + COLUMN_MOVIE_ID + " TEXT"+")";
 
@@ -49,7 +51,6 @@ public class SeatDBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_BOOKED_BY, bookedBy);
         values.put(COLUMN_MOVIE_ID,movieId);
         db.insert(TABLE_NAME, null, values);
-        db.close();
     }
 
     // 更新座位预订状态的方法
@@ -59,24 +60,33 @@ public class SeatDBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_IS_BOOKED, isBooked ? 1 : 0);
         values.put(COLUMN_BOOKED_BY,userName);
         db.update(TABLE_NAME, values, COLUMN_SEAT_NUMBER + " = ? AND " + COLUMN_MOVIE_ID + " = ?", new String[]{seatNumber, movieId});
-        db.close();
     }
 
     // 获取座位信息的方法
-    public Seat getSeat(String MovieID) {
+    public List<Seat> getSeat(String movieID) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_NAME, null,  COLUMN_MOVIE_ID+ " = ?", new String[]{String.valueOf(MovieID)}, null, null, null);
-        if (cursor != null && cursor.moveToFirst()) {
-            @SuppressLint("Range") int seatID = cursor.getInt(cursor.getColumnIndex(COLUMN_SEAT_ID));
-            @SuppressLint("Range") String SeatNumber = cursor.getString(cursor.getColumnIndex(COLUMN_SEAT_NUMBER));
-            @SuppressLint("Range") boolean isBooked = (cursor.getInt(cursor.getColumnIndex(COLUMN_IS_BOOKED))==1);
-            @SuppressLint("Range") String bookedBy = cursor.getString(cursor.getColumnIndex(COLUMN_BOOKED_BY));
-            @SuppressLint("Range") String  movieID = cursor.getString(cursor.getColumnIndex(COLUMN_MOVIE_ID));
-            Seat seat = new Seat(seatID,SeatNumber, isBooked, bookedBy, movieID);
-            cursor.close();
-            return seat;
+        ArrayList<Seat> seats = new ArrayList<Seat>(); // 使用ArrayList并初始化
+        String[] selectionArgs = {movieID};
+        Cursor cursor = db.query(TABLE_NAME, null, COLUMN_MOVIE_ID + " = ?", selectionArgs, null, null, null);
+
+        if (cursor != null) {
+            try {
+                if (cursor.moveToFirst()) {
+                    do {
+                        int seatID = cursor.getInt(cursor.getColumnIndex(COLUMN_SEAT_ID));
+                        String seatNumber = cursor.getString(cursor.getColumnIndex(COLUMN_SEAT_NUMBER));
+                        boolean isBooked = (cursor.getInt(cursor.getColumnIndex(COLUMN_IS_BOOKED)) == 1);
+                        String bookedBy = cursor.getString(cursor.getColumnIndex(COLUMN_BOOKED_BY));
+                        Seat seat = new Seat(seatID, seatNumber, isBooked, bookedBy, movieID);
+                        seats.add(seat); // 将座位添加到列表中
+                    } while (cursor.moveToNext());
+                }
+            } finally {
+                cursor.close(); // 确保在finally块中关闭cursor
+            }
         }
-        return null;
+
+        return seats; // 返回座位列表，如果为空则返回空列表
     }
 
 }

@@ -46,4 +46,14 @@ public class Seat {
         this.bookedBy = bookedBy;
     }
 
+    public String getMovieID() {
+        return movieID;
+    }
+
+    public void setMovieID (String movieID) {
+        this.movieID = movieID;
+    }
+
+
+
 }

@@ -71,65 +71,16 @@
         android:background="@color/design_default_color_secondary"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
 
-        <ImageView
-            android:id="@+id/seat1"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:layout_marginTop="80dp"
-            android:src="@drawable/seat1"
-            android:tag="seat1"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/seat_recycler_view"
+            android:layout_width="350dp"
+            android:layout_height="match_parent"
+            android:scrollbars="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.044"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/seat2"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:layout_marginTop="80dp"
-            android:src="@drawable/seat2"
-            android:tag="seat2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.459"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/seat3"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:layout_marginTop="80dp"
-            android:src="@drawable/seat3"
-            android:tag="seat3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.953"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/seat4"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:layout_marginTop="232dp"
-            android:src="@drawable/seat4"
-            android:tag="seat4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.765"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/seat5"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:layout_marginTop="232dp"
-            android:src="@drawable/seat5"
-            android:tag="seat5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.231"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -149,7 +100,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="36dp"
-        android:text="确定购票，一旦点击，不可撤回"
+        android:text="结束购票，一旦点击，不可撤回"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

@@ -1,22 +1,15 @@
 package com.example.app1;
 
-import static com.example.app1.SeatDBHelper.COLUMN_BOOKED_BY;
-import static com.example.app1.SeatDBHelper.COLUMN_IS_BOOKED;
-import static com.example.app1.SeatDBHelper.COLUMN_MOVIE_ID;
-import static com.example.app1.SeatDBHelper.COLUMN_SEAT_ID;
-import static com.example.app1.SeatDBHelper.COLUMN_SEAT_NUMBER;
-import static com.example.app1.SeatDBHelper.TABLE_NAME;
-
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
@@ -25,9 +18,12 @@ public class MovieDetailActivity extends AppCompatActivity {
     public static final String EXTRA_IMAGE_RES_ID = "extra_image_res_id";
     private SeatDBHelper seatDBHelper;
     private DatabaseHelper databaseHelper;
+    private RecyclerView seatRecyclerView;
+    private SeatAdapter seatAdapter;
     private EditText Username;
 
-    private List<Seat> seats;
+    private List<Seat> seatList;
+    private int numberOfColumns = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,64 +40,39 @@ public class MovieDetailActivity extends AppCompatActivity {
             imageView.setImageResource(imageResId);
         }
         //座位预订部分
+        seatRecyclerView = findViewById(R.id.seat_recycler_view);
+        EditText Username = findViewById(R.id.username_buy);
+        String username = Username.toString().trim();
         seatDBHelper = new SeatDBHelper(this);
-        seats = (List<Seat>) seatDBHelper.getSeat(MovieID); // 从数据库获取座位数据
-        for (Seat seat : seats) {
-            String seatNumber = seat.getSeatNumber();
-            boolean isbooked = seat.isBooked();
-            String bookedBy = seat.getBookedBy();
-            String imageid ="R.id."+seatNumber;
-            ImageView seatView= findViewById(Integer.parseInt(imageid));
-            // 设置座位图片和点击事件
-            seatView.setImageResource(isbooked ? R.drawable.seat_booked : R.drawable.seat_available);
-            if(!isbooked){
-                seatView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Username = findViewById(R.id.username_buy);
-                        String username = Username.getText().toString().trim();
-                        // 更新座位预订状态并保存到数据库
-                        Seat seat = findSeatByView(v,MovieID);
-                        String seatNumber = seat.getSeatNumber();
-                        boolean isbooked = seat.isBooked();
+        seatList = (List<Seat>) seatDBHelper.getSeat(MovieID);// 从数据库获取座位数据
+        seatAdapter = new SeatAdapter(this, seatList);
+        seatRecyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
+        seatRecyclerView.setAdapter(seatAdapter);
 
-                        boolean newStatus = !seat.isBooked();
-                        seat.setBooked(newStatus);
-                        seatDBHelper.updateSeatBooking(seatNumber,isbooked,MovieID,username);
-                        // 更新座位视图
-                        ((ImageView) v).setImageResource(newStatus ? R.drawable.seat_booked : R.drawable.seat_available);
-                    }
-                });
+        seatAdapter.setOnSeatClickListener(seat -> {
+            if (!seat.isBooked() && !username.isEmpty()) {
+                    // 更新座位状态为已预订
+                    seat.setBooked(true);
+                    // 更新数据库...
+                    seatDBHelper.updateSeatBooking(seat.getSeatNumber(),seat.isBooked(),seat.getMovieID(),username);
+                    // 更新UI
+                    seatAdapter.notifyItemChanged(getSeatPosition(seat));
+                    Toast.makeText(this, "订票成功", Toast.LENGTH_SHORT).show();
             }
-
+            else Toast.makeText(this, "请检查用户名输入或您所选座位已被预订", Toast.LENGTH_SHORT).show();
+        });
         }
-    }
-    private Seat findSeatByView(View view,String MovieID) {
-        // 从视图的 tag 中获取座位号
-        String seatNumber = (String) view.getTag();
-        if (seatNumber != null) {
-            // 使用座位号和电影ID在数据库中查找座位记录
-            SQLiteDatabase db = seatDBHelper.getReadableDatabase();
-            Cursor cursor = db.rawQuery(
-                    "SELECT * FROM " + TABLE_NAME +
-                            " WHERE " + COLUMN_SEAT_NUMBER + " = ? AND " +
-                            COLUMN_MOVIE_ID + " = ?",
-                    new String[] {seatNumber, MovieID}
-            );
-
-            if (cursor != null && cursor.moveToFirst()) {
-                @SuppressLint("Range") Seat seat = new Seat(
-                        cursor.getInt(cursor.getColumnIndex(COLUMN_SEAT_ID)),
-                        cursor.getString(cursor.getColumnIndex(COLUMN_SEAT_NUMBER)),
-                        cursor.getInt(cursor.getColumnIndex(COLUMN_IS_BOOKED)) == 1,
-                        cursor.getString(cursor.getColumnIndex(COLUMN_BOOKED_BY)),
-                        cursor.getString(cursor.getColumnIndex(COLUMN_MOVIE_ID))
-                );
-                cursor.close();
-                return seat;
+    private int getSeatPosition(Seat seat) {
+        // 遍历座位列表以找到 Seat 对象的索引位置
+        for (int i = 0; i < seatList.size(); i++) {
+            Seat currentSeat = seatList.get(i);
+            if (currentSeat.getSeatID() == seat.getSeatID()) {
+                // 如果找到匹配的 Seat 对象，返回其索引位置
+                return i;
             }
         }
-        return null;
+        // 如果没有找到 Seat 对象，返回 -1 或其他表示未找到的值
+        return -1;
     }
     public void GoFirst(View btn){
         Intent intent = new Intent(MovieDetailActivity.this,PwdFindActivity.class);

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +64,7 @@ public class SeatDBHelper extends SQLiteOpenHelper {
     }
 
     // 获取座位信息的方法
-    public List<Seat> getSeat(String movieID) {
+    public List<Seat> getSeatByMovie(String movieID) {
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<Seat> seats = new ArrayList<Seat>(); // 使用ArrayList并初始化
         String[] selectionArgs = {movieID};
@@ -78,6 +79,32 @@ public class SeatDBHelper extends SQLiteOpenHelper {
                         boolean isBooked = (cursor.getInt(cursor.getColumnIndex(COLUMN_IS_BOOKED)) == 1);
                         String bookedBy = cursor.getString(cursor.getColumnIndex(COLUMN_BOOKED_BY));
                         Seat seat = new Seat(seatID, seatNumber, isBooked, bookedBy, movieID);
+                        seats.add(seat); // 将座位添加到列表中
+                    } while (cursor.moveToNext());
+                }
+            } finally {
+                cursor.close(); // 确保在finally块中关闭cursor
+            }
+        }
+
+        return seats; // 返回座位列表，如果为空则返回空列表
+    }
+
+    public List<Seat> getSeatByUser(String username) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<Seat> seats = new ArrayList<Seat>(); // 使用ArrayList并初始化
+        String[] selectionArgs = {username};
+        Cursor cursor = db.query(TABLE_NAME, null, COLUMN_BOOKED_BY + " = ?", selectionArgs, null, null, null);
+
+        if (cursor != null) {
+            try {
+                if (cursor.moveToFirst()) {
+                    do {
+                        int seatID = cursor.getInt(cursor.getColumnIndex(COLUMN_SEAT_ID));
+                        String seatNumber = cursor.getString(cursor.getColumnIndex(COLUMN_SEAT_NUMBER));
+                        boolean isBooked = (cursor.getInt(cursor.getColumnIndex(COLUMN_IS_BOOKED)) == 1);
+                        String movieID = cursor.getString(cursor.getColumnIndex(COLUMN_MOVIE_ID));
+                        Seat seat = new Seat(seatID, seatNumber, isBooked,username,movieID);
                         seats.add(seat); // 将座位添加到列表中
                     } while (cursor.moveToNext());
                 }

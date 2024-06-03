@@ -21,6 +21,6 @@ public class OpenActivity extends Activity {
                     startActivity(intent);
                     finish(); // 结束OpenActivity
                 }
-            }, 5000); // 5000毫秒即5秒
+            }, 3000); // 5000毫秒即5秒
         }
     }

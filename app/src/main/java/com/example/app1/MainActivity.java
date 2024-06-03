@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -79,17 +80,21 @@ public class MainActivity extends Activity {
         }
 
         // 根据图片资源ID跳转到对应的界面
+        MovieTAG.setCurrentTAG("hot");
         Intent intent = new Intent(this, MovieDetailActivity.class);
         intent.putExtra(MovieDetailActivity.EXTRA_IMAGE_RES_ID, imageResId);
         startActivity(intent);
     }
 
     private void showImageDetailFuture(int imageResId) {
-
-
         // 根据图片资源ID跳转到对应的界面
+        MovieTAG.setCurrentTAG("future");
         Intent intent = new Intent(this, MovieDetailActivity.class);
         intent.putExtra(MovieDetailActivity.EXTRA_IMAGE_RES_ID, imageResId);
+        startActivity(intent);
+    }
+    public void GoMine(View btn){
+        Intent intent = new Intent(MainActivity.this,MineActivity.class);
         startActivity(intent);
     }
 

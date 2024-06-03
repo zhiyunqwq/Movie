@@ -31,10 +31,10 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
     //前往找回密码
-    public void GoPwd(View btn){
-        Intent intent = new Intent(LoginActivity.this,PwdFindActivity.class);
-        startActivity(intent);
-    }
+        public void GoPwd(View btn){
+            Intent intent = new Intent(LoginActivity.this,PwdFindActivity.class);
+            startActivity(intent);
+        }
 
     //登录方法
     public void Log(View btn) {
@@ -57,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         boolean isMatch = mDatabaseHelper.checkUser(username, password);
 
         if (isMatch) {
+            User.setCurrentUsername(username);
             // 登录成功
             Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
             // 跳转到MainActivity

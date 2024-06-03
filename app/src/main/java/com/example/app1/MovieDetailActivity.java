@@ -3,7 +3,6 @@ package com.example.app1;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -20,8 +19,6 @@ public class MovieDetailActivity extends AppCompatActivity {
     private DatabaseHelper databaseHelper;
     private RecyclerView seatRecyclerView;
     private SeatAdapter seatAdapter;
-    private EditText Username;
-
     private List<Seat> seatList;
     private int numberOfColumns = 5;
 
@@ -39,18 +36,21 @@ public class MovieDetailActivity extends AppCompatActivity {
             ImageView imageView = findViewById(R.id.movie_image);
             imageView.setImageResource(imageResId);
         }
-        //座位预订部分
-        seatRecyclerView = findViewById(R.id.seat_recycler_view);
-        EditText Username = findViewById(R.id.username_buy);
-        String username = Username.toString().trim();
-        seatDBHelper = new SeatDBHelper(this);
-        seatList = (List<Seat>) seatDBHelper.getSeat(MovieID);// 从数据库获取座位数据
-        seatAdapter = new SeatAdapter(this, seatList);
-        seatRecyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
-        seatRecyclerView.setAdapter(seatAdapter);
 
-        seatAdapter.setOnSeatClickListener(seat -> {
-            if (!seat.isBooked() && !username.isEmpty()) {
+
+        //热映电影处理
+        if (MovieTAG.getCurrentTAG().equals("hot")){
+            //座位预订部分
+            seatRecyclerView = findViewById(R.id.seat_recycler_view);
+            String username = User.getCurrentUsername();
+            seatDBHelper = new SeatDBHelper(this);
+            seatList = (List<Seat>) seatDBHelper.getSeatByMovie(MovieID);// 从数据库获取座位数据
+            seatAdapter = new SeatAdapter(this, seatList);
+            seatRecyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
+            seatRecyclerView.setAdapter(seatAdapter);
+
+            seatAdapter.setOnSeatClickListener(seat -> {
+                if (!seat.isBooked() && !username.isEmpty()) {
                     // 更新座位状态为已预订
                     seat.setBooked(true);
                     // 更新数据库...
@@ -58,10 +58,17 @@ public class MovieDetailActivity extends AppCompatActivity {
                     // 更新UI
                     seatAdapter.notifyItemChanged(getSeatPosition(seat));
                     Toast.makeText(this, "订票成功", Toast.LENGTH_SHORT).show();
-            }
-            else Toast.makeText(this, "请检查用户名输入或您所选座位已被预订", Toast.LENGTH_SHORT).show();
-        });
+                }
+                else Toast.makeText(this, "请检查用户名输入或您所选座位已被预订", Toast.LENGTH_SHORT).show();
+            });
         }
+
+        //即将上映电影处理
+        else if (MovieTAG.getCurrentTAG().equals("future")) {
+
+        }
+
+    }
     private int getSeatPosition(Seat seat) {
         // 遍历座位列表以找到 Seat 对象的索引位置
         for (int i = 0; i < seatList.size(); i++) {
@@ -75,7 +82,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         return -1;
     }
     public void GoFirst(View btn){
-        Intent intent = new Intent(MovieDetailActivity.this,PwdFindActivity.class);
+        Intent intent = new Intent(MovieDetailActivity.this,MainActivity.class);
         startActivity(intent);
     }
 }

@@ -36,10 +36,6 @@ public class MovieDetailActivity extends AppCompatActivity {
             ImageView imageView = findViewById(R.id.movie_image);
             imageView.setImageResource(imageResId);
         }
-
-
-        //热映电影处理
-        if (MovieTAG.getCurrentTAG().equals("hot")){
             //座位预订部分
             seatRecyclerView = findViewById(R.id.seat_recycler_view);
             String username = User.getCurrentUsername();
@@ -61,12 +57,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                 }
                 else Toast.makeText(this, "请检查用户名输入或您所选座位已被预订", Toast.LENGTH_SHORT).show();
             });
-        }
 
-        //即将上映电影处理
-        else if (MovieTAG.getCurrentTAG().equals("future")) {
-
-        }
 
     }
     private int getSeatPosition(Seat seat) {

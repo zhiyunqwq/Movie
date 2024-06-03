@@ -87,9 +87,23 @@ public class MainActivity extends Activity {
     }
 
     private void showImageDetailFuture(int imageResId) {
+        //在点击跳转时，为电影创建座位数据
+        SQLiteDatabase db = this.seatDBHelper.getReadableDatabase();
+        String selection = COLUMN_MOVIE_ID + "=?";
+        String[] columns = {
+                COLUMN_SEAT_ID
+        };
+            String[] selectionArgs = {"" + imageResId};
+
+            Cursor cursor = db.query(TABLE_NAME,columns, selection, selectionArgs, null, null, null);
+            int cursorCount = cursor.getCount();
+            if (cursorCount == 0){
+                seatDBHelper.addSeat("future", null, "" + imageResId);
+
+        }
         // 根据图片资源ID跳转到对应的界面
         MovieTAG.setCurrentTAG("future");
-        Intent intent = new Intent(this, MovieDetailActivity.class);
+        Intent intent = new Intent(this, FutureMovieActivity.class);
         intent.putExtra(MovieDetailActivity.EXTRA_IMAGE_RES_ID, imageResId);
         startActivity(intent);
     }

@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginTop="15dp"
-            android:text="评分"
+            android:text="期待值："
             android:textSize="15sp" />
 
         <TextView
@@ -62,7 +62,7 @@
 
         android:id="@+id/ll_seats"
         android:layout_width="413dp"
-        android:layout_height="443dp"
+        android:layout_height="300dp"
         android:layout_marginTop="44dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -73,42 +73,50 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/poster_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="300dp"
             android:scrollbars="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints" />
-
-
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_number"
+        android:gravity="center"
+        android:layout_width="378dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="56dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_seats" />
 
     <Button
         android:id="@+id/btn_confirm"
-        android:layout_width="174dp"
-        android:layout_height="52dp"
-        android:text="预约此电影"
-        android:onClick="Confirm"
-        android:layout_marginStart="16dp"
+        android:layout_width="159dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="28dp"
         android:layout_marginBottom="36dp"
+        android:onClick="Confirm"
+        android:text="预约此电影"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ll_seats"
-        app:layout_constraintVertical_bias="0.333"/>
+        app:layout_constraintVertical_bias="0.865" />
 
     <Button
         android:id="@+id/btn_GoFirst"
-        android:layout_width="174dp"
-        android:layout_height="52dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="159dp"
+        android:layout_height="56dp"
+        android:layout_marginEnd="28dp"
         android:layout_marginBottom="36dp"
         android:onClick="GoFirst"
         android:text="返回主页"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ll_seats"
-        app:layout_constraintVertical_bias="0.333" />
+        app:layout_constraintVertical_bias="0.868" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

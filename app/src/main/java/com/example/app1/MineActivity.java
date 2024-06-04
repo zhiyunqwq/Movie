@@ -53,21 +53,21 @@ public class MineActivity extends AppCompatActivity {
             order.setSeatNumber("已预约");
             order.setBookedBy(seat.getBookedBy());
             if (seat.getMovieID().equals("2131165319")) {
-                order.setMovieID("电影四");
+                order.setMovieID("美国内战");
             } else if (seat.getMovieID().equals("2131165320")) {
-                order.setMovieID("电影五");
+                order.setMovieID("九龙城寨");
             } else if (seat.getMovieID().equals("2131165321")) {
-                order.setMovieID("电影六");
+                order.setMovieID("来福大酒店");
             }
         } else {
             order.setSeatNumber(seat.getSeatNumber());
             order.setBookedBy(seat.getBookedBy());
             if (seat.getMovieID().equals("2131165322")) {
-                order.setMovieID("电影一");
+                order.setMovieID("哆啦A梦");
             } else if (seat.getMovieID().equals("2131165323")) {
-                order.setMovieID("电影二");
+                order.setMovieID("加菲猫家族");
             } else if (seat.getMovieID().equals("2131165324")) {
-                order.setMovieID("电影三");
+                order.setMovieID("三叉戟");
             }
 
         }

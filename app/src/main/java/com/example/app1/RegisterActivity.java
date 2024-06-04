@@ -1,11 +1,12 @@
 package com.example.app1;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.*;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class RegisterActivity extends AppCompatActivity {
     private EditText Username, Password, ConfirmPassword,Email;
@@ -43,33 +44,37 @@ public class RegisterActivity extends AppCompatActivity {
         String password = this.Password.getText().toString().trim();
         String confirmPassword = this.ConfirmPassword.getText().toString().trim();
         String email = this.Email.getText().toString().trim();
-
-        // 检查用户名和密码是否为空
-        if (username.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "请输入账号或密码", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        // 检查两次输入的密码是否一致
-        if (password.equals(confirmPassword)) {
-            // 插入数据库
-            boolean isInserted = mDatabaseHelper.insertData(username, password,email);
-
-            if (isInserted) {
-                // 注册成功
-                Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
-                // 跳转到登录页面
-                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                startActivity(intent);
-                // 关闭当前页面
-                finish();
-            } else {
-                // 注册失败
-                Toast.makeText(this, "注册失败", Toast.LENGTH_SHORT).show();
-            }
-        } else {
-            // 密码不一致
-            Toast.makeText(this, "两次密码不同", Toast.LENGTH_SHORT).show();
-        }
+    //检查用户是否存在
+    if (!mDatabaseHelper.isUsernameExists(username)){
+    // 检查用户名和密码是否为空
+    if (username.isEmpty() || password.isEmpty()) {
+        Toast.makeText(this, "请输入账号或密码", Toast.LENGTH_SHORT).show();
+        return;
     }
+
+
+    // 检查两次输入的密码是否一致
+    if (password.equals(confirmPassword)) {
+        // 插入数据库
+        boolean isInserted = mDatabaseHelper.insertData(username, password,email);
+
+        if (isInserted) {
+            // 注册成功
+            Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
+            // 跳转到登录页面
+            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+            startActivity(intent);
+            // 关闭当前页面
+            finish();
+        } else {
+            // 注册失败
+            Toast.makeText(this, "注册失败", Toast.LENGTH_SHORT).show();
+        }
+    } else {
+        // 密码不一致
+        Toast.makeText(this, "两次密码不同", Toast.LENGTH_SHORT).show();
+    }
+}else Toast.makeText(this, "此用户已存在", Toast.LENGTH_SHORT).show();
+}
+
 }

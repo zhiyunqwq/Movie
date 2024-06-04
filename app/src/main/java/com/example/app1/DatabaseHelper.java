@@ -18,7 +18,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String CREATE_TABLE_USERS = "CREATE TABLE "
             + TABLE_USERS + "(" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-            + COLUMN_USERNAME + " TEXT,"
+            + COLUMN_USERNAME + " TEXT UNIQUE,"
             + COLUMN_PASSWORD + " TEXT,"
             + COLUMN_EMAIL + " TEXT" + ")";
 
@@ -109,6 +109,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // 如果没有找到匹配的用户名和邮箱，返回false
         return false;
+    }
+    public boolean isUsernameExists(String username) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] columns = { COLUMN_ID }; // 假设用户表的主键是 COLUMN_USER_ID
+        String selection = COLUMN_USERNAME + " = ?";
+        String[] selectionArgs = { username };
+        Cursor cursor = null;
+        boolean exists = false;
+
+        try {
+            cursor = db.query(TABLE_USERS, columns, selection, selectionArgs, null, null, null);
+            exists = cursor.getCount() > 0; // 如果游标中有数据，说明用户名已存在
+        } finally {
+            if (cursor != null) {
+                cursor.close(); // 关闭游标释放资源
+            }
+            db.close(); // 关闭数据库连接
+        }
+
+        return exists;
     }
 
 }

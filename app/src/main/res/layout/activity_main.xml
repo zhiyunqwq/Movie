@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f1f1f1"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/cardview_light_background"
+    >
 
     <Button
         android:layout_width="161dp"
@@ -52,13 +53,13 @@
                 android:layout_height="256dp"
                 android:layout_marginTop="8dp"
                 android:background="@color/cardview_light_background"
-                app:layout_constraintEnd_toStartOf="@+id/guideline2"
-                app:layout_constraintStart_toStartOf="@+id/guideline" />
+ />
 
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="357dp"
                 android:layout_height="240dp"
+                android:layout_marginTop="8dp"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -88,7 +89,9 @@
                     android:layout_height="match_parent"
                     android:padding="5dp"
                     android:layout_margin="4dp"
-                    android:scrollbars="horizontal" />
+                    android:scrollbars="horizontal"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                    app:layout_constraintStart_toStartOf="@+id/guideline"/>
             </LinearLayout>
 
             <View

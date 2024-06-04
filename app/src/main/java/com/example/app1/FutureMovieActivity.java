@@ -24,7 +24,6 @@ public class FutureMovieActivity extends AppCompatActivity {
     private String MovieID;
     private RecyclerView seatRecyclerView;
     private MainImageAdapter mainImageAdapterFuture;
-    private SeatAdapter seatAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -23,10 +23,10 @@
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -51,9 +51,11 @@
                 android:id="@+id/view"
                 android:layout_width="0dp"
                 android:layout_height="256dp"
-                android:layout_marginTop="8dp"
                 android:background="@color/cardview_light_background"
- />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.105"
+                tools:layout_editor_absoluteX="0dp" />
 
             <LinearLayout
                 android:id="@+id/linearLayout"
@@ -87,21 +89,21 @@
                     android:id="@+id/rv_hot"
                     android:layout_width="350dp"
                     android:layout_height="match_parent"
-                    android:padding="5dp"
                     android:layout_margin="4dp"
+                    android:padding="5dp"
                     android:scrollbars="horizontal"
                     app:layout_constraintEnd_toStartOf="@+id/guideline2"
-                    app:layout_constraintStart_toStartOf="@+id/guideline"/>
+                    app:layout_constraintStart_toStartOf="@+id/guideline" />
             </LinearLayout>
 
             <View
                 android:id="@+id/view2"
                 android:layout_width="0dp"
                 android:layout_height="250dp"
-                android:layout_marginTop="132dp"
+                android:layout_marginTop="60dp"
                 android:background="@color/cardview_light_background"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/view" />
 
@@ -122,10 +124,10 @@
                 android:id="@+id/rv_future"
                 android:layout_width="350dp"
                 android:layout_height="220dp"
-                android:orientation="horizontal"
-                android:scrollbars="horizontal"
-                android:padding="5dp"
                 android:layout_margin="4dp"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:scrollbars="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
